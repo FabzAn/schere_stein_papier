@@ -48,6 +48,7 @@ void main() {
 
     expect(tester.widget<Text>(findComputerScore).data, equals("1"));
     expect(tester.widget<Text>(findPlayerScore).data, equals("0"));
+    expect(find.text("Verloren"), findsOneWidget);
   });
 
   testWidgets("Increment player score on win", (WidgetTester tester) async {
@@ -64,6 +65,7 @@ void main() {
 
     expect(tester.widget<Text>(findComputerScore).data, equals("0"));
     expect(tester.widget<Text>(findPlayerScore).data, equals("1"));
+    expect(find.text("Gewonnen"), findsOneWidget);
   });
 
   testWidgets("Increment no score on draw", (WidgetTester tester) async {
@@ -80,5 +82,6 @@ void main() {
 
     expect(tester.widget<Text>(findComputerScore).data, equals("0"));
     expect(tester.widget<Text>(findPlayerScore).data, equals("0"));
+    expect(find.text("Unentschieden"), findsOneWidget);
   });
 }

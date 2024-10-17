@@ -34,7 +34,13 @@ class Board extends StatelessWidget {
             ),
           ],
         )),
-        const Spacer() // Ensure ActionCards are centered
+        Expanded(
+            child: Text(switch (gameState.lastGame) {
+          GameResult.draw => "Unentschieden",
+          GameResult.win => "Gewonnen",
+          GameResult.loss => "Verloren",
+          _ => "",
+        }))
       ],
     );
   }

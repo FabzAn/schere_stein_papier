@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:schere_stein_papier/action_selection.dart';
 import 'package:schere_stein_papier/board.dart';
 
+enum GameResult { win, loss, draw }
+
 enum GameAction {
   schere,
   stein,
@@ -15,26 +17,25 @@ enum GameAction {
         papier => "✋🏻",
       };
 
-  /// Returns 1 for win, 0 for draw, -1 for loss
-  int compareTo(GameAction other) {
+  GameResult compareTo(GameAction other) {
     switch (this) {
       case schere:
         return switch (other) {
-          schere => 0,
-          stein => -1,
-          papier => 1,
+          schere => GameResult.draw,
+          stein => GameResult.loss,
+          papier => GameResult.win,
         };
       case stein:
         return switch (other) {
-          schere => 1,
-          stein => 0,
-          papier => -1,
+          schere => GameResult.win,
+          stein => GameResult.draw,
+          papier => GameResult.loss,
         };
       case papier:
         return switch (other) {
-          schere => -1,
-          stein => 1,
-          papier => 0,
+          schere => GameResult.loss,
+          stein => GameResult.win,
+          papier => GameResult.draw,
         };
     }
   }
@@ -45,6 +46,7 @@ class GameState {
   int playerScore = 0;
   GameAction? computerAction;
   GameAction? playerAction;
+  GameResult? lastGame;
 }
 
 class GameWidget extends StatefulWidget {
@@ -72,15 +74,16 @@ class _GameWidgetState extends State<GameWidget> {
 
   void _play(GameAction playerAction) {
     GameAction computerAction = _pickAction();
-    int result = playerAction.compareTo(computerAction);
+    GameResult result = playerAction.compareTo(computerAction);
 
     setState(() {
-      if (result == -1) {
+      if (result == GameResult.loss) {
         _gameState.computerScore++;
-      } else if (result == 1) {
+      } else if (result == GameResult.win) {
         _gameState.playerScore++;
       }
 
+      _gameState.lastGame = result;
       _gameState.playerAction = playerAction;
       _gameState.computerAction = computerAction;
     });
