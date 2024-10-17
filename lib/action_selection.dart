@@ -40,6 +40,7 @@ class _ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      key: const Key("blub"),
       color: Theme.of(context).colorScheme.primary,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       onPressed: onPressed,

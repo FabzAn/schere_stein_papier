@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:schere_stein_papier/action_selection.dart';
-import 'package:schere_stein_papier/board.dart';
 import 'package:schere_stein_papier/game_controller.dart';
 
 void main() {
@@ -35,16 +33,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(title),
       ),
-      body: Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        Board(
-          gameState: GameState(),
-        ),
-        ActionSelection(
-          onScherePressed: () => print("test schere"),
-          onSteinPressed: () => print("test stein"),
-          onPapierPressed: () => print("test papier"),
-        )
-      ]),
+      body: GameWidget(),
     );
   }
 }

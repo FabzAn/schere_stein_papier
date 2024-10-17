@@ -15,8 +15,12 @@ class Board extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _ScoreCard(score: gameState.computerScore),
-                _ScoreCard(score: gameState.playerScore),
+                _ScoreCard(
+                    key: const Key("computerScore"),
+                    score: gameState.computerScore),
+                _ScoreCard(
+                    key: const Key("playerScore"),
+                    score: gameState.playerScore),
               ],
             )),
         Expanded(
@@ -39,7 +43,7 @@ class Board extends StatelessWidget {
 class _ScoreCard extends StatelessWidget {
   final int score;
 
-  const _ScoreCard({required this.score});
+  const _ScoreCard({super.key, required this.score});
 
   @override
   Widget build(BuildContext context) {
