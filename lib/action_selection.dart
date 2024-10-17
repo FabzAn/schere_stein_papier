@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schere_stein_papier/game_controller.dart';
 
 class ActionSelection extends StatelessWidget {
   final VoidCallback onScherePressed;
@@ -14,27 +15,27 @@ class ActionSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OverflowBar(spacing: 8, children: [
-      ActionButton(
-        text: "✌️🏻",
+      _ActionButton(
+        text: GameAction.schere.emoji,
         onPressed: onScherePressed,
       ),
-      ActionButton(
-        text: "✊🏻",
+      _ActionButton(
+        text: GameAction.stein.emoji,
         onPressed: onSteinPressed,
       ),
-      ActionButton(
-        text: "✋🏻",
+      _ActionButton(
+        text: GameAction.papier.emoji,
         onPressed: onPapierPressed,
       ),
     ]);
   }
 }
 
-class ActionButton extends StatelessWidget {
+class _ActionButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const ActionButton({super.key, required this.text, required this.onPressed});
+  const _ActionButton({required this.text, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
