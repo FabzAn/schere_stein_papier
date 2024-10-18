@@ -17,28 +17,20 @@ enum GameAction {
         papier => "✋🏻",
       };
 
-  GameResult compareTo(GameAction other) {
-    switch (this) {
-      case schere:
-        return switch (other) {
-          schere => GameResult.draw,
-          stein => GameResult.loss,
-          papier => GameResult.win,
-        };
-      case stein:
-        return switch (other) {
-          schere => GameResult.win,
-          stein => GameResult.draw,
-          papier => GameResult.loss,
-        };
-      case papier:
-        return switch (other) {
-          schere => GameResult.loss,
-          stein => GameResult.win,
-          papier => GameResult.draw,
-        };
-    }
-  }
+  GameResult compareTo(GameAction other) => switch ((this, other)) {
+        (schere, papier) ||
+        (stein, schere) ||
+        (papier, stein) =>
+          GameResult.win,
+        (schere, stein) ||
+        (stein, papier) ||
+        (papier, schere) =>
+          GameResult.loss,
+        (schere, schere) ||
+        (stein, stein) ||
+        (papier, papier) =>
+          GameResult.draw,
+      };
 }
 
 class GameState {
